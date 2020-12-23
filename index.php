@@ -9,9 +9,10 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
     </head>
     <body>
-        <form method ="post" action="index.php" >
-            <input type="submit" value="next">
+        <form method ="get" action="index.php" >
+            <input type="submit" name ="tinder" value="next">
         </form>
+
             <?php
                 $servername = "localhost";
                 $username = "root";
@@ -24,15 +25,23 @@
                 echo "connected successfully";
                 $quer="SELECT * FROM user";
                 $ans = $conn->query($quer);
+                if(isset($_GET["tinder"])){
+                    echo "butto clicked";
                 if($ans->num_rows > 0){
                     while($row = $ans->fetch_assoc()){
                         echo $row["id"]." : " .$row["name"]."<br>";
+                        
                     }
                 }
                 else{
                     echo "no result";
                 }
+            }
+            else{
+                echo "button is not clicked";
+            }
                 $conn->close();
             ?>
     </body>
 </html>
+
